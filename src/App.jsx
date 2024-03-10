@@ -5,6 +5,7 @@ import Cookies from 'js-cookie'
 import Login from './assets/Login/Login'
 import AdminLogin from './assets/adminLogin/AdminLogin'
 import AdminSignup from './assets/adminSignup/AdminSignup'
+import Home from './assets/home/Home'
 function App() {
   const [user, setUser] = useState(null)
   const VerifyUser = async () => {
@@ -25,6 +26,7 @@ function App() {
     <>
       <Router>
         <Routes>
+          <Route path='/' element={<Home  />} />
           <Route path='/register' element={<Register userState={{ user, setUser }} />} />
           <Route path='/login' element={<Login userState={{ user, setUser }} />} />
           <Route path='/officials/login' element={<AdminLogin userState={{ user, setUser }} />} />

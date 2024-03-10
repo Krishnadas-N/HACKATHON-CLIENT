@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Input from '../Components/Input';
-import { emailValidation, nameValidation, passwordValidation, phoneNumberValidation } from '../Script/Common';
+import { emailValidation, nameValidation, passwordValidation, phoneNumberValidation ,govtValidation} from '../Script/Common';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
@@ -11,6 +11,7 @@ function AdminSignup({userState}) {
     const [Name, setName] = useState('');
     const [Email, setEmail] = useState('');
     const [Phone, setPhone] = useState('');
+    const [Govt, setGovt] = useState('');
     const [Password, setPassword] = useState('');
     const [Confirm, setConfirm] = useState('');
     const [show, setShow] = useState(false);
@@ -19,6 +20,7 @@ function AdminSignup({userState}) {
     const [nameErr, setNameErr] = useState('');
     const [emailErr, setEmailErr] = useState('');
     const [phoneErr, setPhoneErr] = useState('');
+    const [govtErr, setGovtErr] = useState('');
     const navigate = useNavigate();
     const [err, setErr] = useState('');
     const { setUser } = userState;
@@ -43,6 +45,11 @@ function AdminSignup({userState}) {
                 break;
             case 'Phone':
                 setPhone(value);
+                setPhoneErr('')
+                break;
+            case 'governmentid':
+                setGovt(value);
+                setGovtErr('');
                 break;
             default:
                 break;
@@ -69,6 +76,9 @@ function AdminSignup({userState}) {
             check = false
         }
         if (!phoneNumberValidation(Phone, setPhoneErr)) {
+            check = false
+        }
+        if (!govtValidation(Govt, setGovtErr)) {
             check = false
         }
 
@@ -116,6 +126,10 @@ function AdminSignup({userState}) {
                     <div className="inputBox">
                         <Input Properties={{ type: 'number', name: 'Phone', value: Phone, callback: handleChange, placeholder: 'Enter Phone Number' }} />
                         <p className='text-red-500 justify-center'>{phoneErr}</p>
+                    </div>
+                    <div className="inputBox">
+                        <Input Properties={{ type: 'string', name: 'governmentid', value: Govt, callback: handleChange, placeholder: 'Government Recognised ID' }} />
+                        <p className='text-red-500 justify-center'>{govtErr}</p>
                     </div>
                     <div className="inputBox relative">
                         <input id="password" name="Password"
