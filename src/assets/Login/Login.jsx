@@ -17,7 +17,6 @@ function Login({ userState }) {
     const [err, setErr] = useState('')
     const handleChange = (e) => {
         const { name, value } = e.target;
-
         switch (name) {
             case 'Email':
                 setEmail(value);
