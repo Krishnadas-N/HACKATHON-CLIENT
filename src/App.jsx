@@ -7,6 +7,7 @@ import Home from './assets/home/Home'
 import AdminHome from './assets/AdminHome/AdminHome'
 import { jwtDecode } from 'jwt-decode';
 import { getUserToken } from './Functions'
+import AdminSignup from './assets/adminSignup/AdminSignup'
 
 
 function App() {
@@ -14,12 +15,21 @@ function App() {
   const [user, setUser] = useState(null)
   const [session, setSession] = useState(false)
 
-  const IsUserExist = ({ ifSession, NotSession }) => {
+  const IsUserExist = ({ ifSession, NotSession, admin }) => {
     const token = getUserToken()
     if (token) {
       let decodedToken = jwtDecode(token);
+      console.log(decodedToken);
       let currentDate = new Date();
-      if (decodedToken.exp * 1000 > currentDate.getTime()) { setSession(true) }
+      if (admin) {
+        if (decodedToken.exp * 1000 > currentDate.getTime()) {
+          decodedToken.role === 'official' && setSession(true)
+        }
+      } else {
+        if (decodedToken.exp * 1000 > currentDate.getTime()) {
+          decodedToken.role === 'user' && setSession(true)
+        }
+      }
     }
     return session ? ifSession : NotSession
   }
@@ -32,9 +42,9 @@ function App() {
           <Route path='/register' element={<IsUserExist ifSession={<Navigate to='/' />} NotSession={<Register userState={{ user, setUser }} />} />} />
           <Route path='/login' element={<IsUserExist ifSession={<Navigate to='/' />} NotSession={<Login userState={{ user, setUser }} />} />} />
 
-          <Route path='/officials/login' element={<IsUserExist ifSession={<Navigate to='/officials' />} NotSession={<AdminLogin userState={{ user, setUser }} />} />} />
-          <Route path='/officials' element={<IsUserExist ifSession={<AdminHome />} NotSession={<Navigate to='/officials/login' />} />} />
-
+          <Route path='/officials/login' element={<IsUserExist ifSession={<Navigate to='/officials' />} NotSession={<AdminLogin userState={{ user, setUser }} />} />} admin={true} />
+          <Route path='/officials' element={<IsUserExist ifSession={<AdminHome />} NotSession={<Navigate to='/officials/login' />} />} admin={true} />
+          <Route path='/officials/register' element={<IsUserExist ifSession={<Navigate to='/officials' />} NotSession={<AdminSignup />} />} admin={true} />
         </Routes>
       </Router>
 
