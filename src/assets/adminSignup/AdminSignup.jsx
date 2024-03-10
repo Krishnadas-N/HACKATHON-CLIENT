@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import Input from '../Components/Input';
-import { emailValidation, nameValidation, passwordValidation, phoneNumberValidation } from '../Script/Common';
+import { emailValidation, nameValidation, passwordValidation, phoneNumberValidation ,govtValidation} from '../Script/Common';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Background from '../../../public/userLogin.jpg';
+import Background from '../../../public/Background.jpg';
 
-
-function Register({ userState }) {
+function AdminSignup({userState}) {
     const [Name, setName] = useState('');
     const [Email, setEmail] = useState('');
     const [Phone, setPhone] = useState('');
+    const [Govt, setGovt] = useState('');
     const [Password, setPassword] = useState('');
     const [Confirm, setConfirm] = useState('');
     const [show, setShow] = useState(false);
@@ -20,6 +20,7 @@ function Register({ userState }) {
     const [nameErr, setNameErr] = useState('');
     const [emailErr, setEmailErr] = useState('');
     const [phoneErr, setPhoneErr] = useState('');
+    const [govtErr, setGovtErr] = useState('');
     const navigate = useNavigate();
     const [err, setErr] = useState('');
     const { setUser } = userState;
@@ -44,6 +45,11 @@ function Register({ userState }) {
                 break;
             case 'Phone':
                 setPhone(value);
+                setPhoneErr('')
+                break;
+            case 'governmentid':
+                setGovt(value);
+                setGovtErr('');
                 break;
             default:
                 break;
@@ -72,12 +78,15 @@ function Register({ userState }) {
         if (!phoneNumberValidation(Phone, setPhoneErr)) {
             check = false
         }
+        if (!govtValidation(Govt, setGovtErr)) {
+            check = false
+        }
 
         if (!check) {
             return false
         }
 
-        const response = await axios.post('http://localhost:3000/signup', { Name, Email, Password, Phone }, {
+        const response = await axios.post('http://localhost:3000/officials/register', { Name, Email, Password, Phone }, {
             withCredentials: true
         })
         const { data } = response
@@ -101,7 +110,7 @@ function Register({ userState }) {
             <div className="max-w-md w-full space-y-8 relative">
                 <div>
                     <h2 className="mt-6 text-center text-3xl font-semibold text-gray-900">
-                        Create an account
+                        Create an Account and Help Struggling Women's
                     </h2>
                     <p className='text-red-600 font-serif font-2'>{err}</p>
                 </div>
@@ -117,6 +126,10 @@ function Register({ userState }) {
                     <div className="inputBox">
                         <Input Properties={{ type: 'number', name: 'Phone', value: Phone, callback: handleChange, placeholder: 'Enter Phone Number' }} />
                         <p className='text-red-500 justify-center'>{phoneErr}</p>
+                    </div>
+                    <div className="inputBox">
+                        <Input Properties={{ type: 'string', name: 'governmentid', value: Govt, callback: handleChange, placeholder: 'Government Recognised ID' }} />
+                        <p className='text-red-500 justify-center'>{govtErr}</p>
                     </div>
                     <div className="inputBox relative">
                         <input id="password" name="Password"
@@ -137,7 +150,7 @@ function Register({ userState }) {
                         <button type="button" onClick={registerUser} className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" > Sign up </button>
                     </div>
                     <div className="text-center">
-                        <p className="text-sm text-gray-600"> Already have an account? <a href="#" onClick={(e) => navigate('/login')} className="font-medium text-indigo-600 hover:text-indigo-500"> Sign in now </a> </p>
+                        <p className="text-sm text-gray-600"> Already have an account? <a href="#" onClick={(e) => navigate('/officials/login')} className="font-medium text-indigo-600 hover:text-indigo-500"> Sign in now </a> </p>
                     </div>
                 </form>
 
@@ -146,4 +159,4 @@ function Register({ userState }) {
     )
 }
 
-export default Register
+export default AdminSignup

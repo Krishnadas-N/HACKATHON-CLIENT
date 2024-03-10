@@ -4,9 +4,9 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Background from '../../../public/userLogin.jpg'
+import Background from '../../../public/Background.jpg'
 
-function Login({ userState }) {
+function AdminLogin({userState}) {
     const [Email, setEmail] = useState('')
     const [Password, setPassword] = useState('')
     const [show, setShow] = useState(false)
@@ -17,6 +17,7 @@ function Login({ userState }) {
     const [err, setErr] = useState('')
     const handleChange = (e) => {
         const { name, value } = e.target;
+
         switch (name) {
             case 'Email':
                 setEmail(value);
@@ -51,14 +52,13 @@ function Login({ userState }) {
         if (!check) {
             return false
         }
-
-        const response = await axios.post('http://localhost:3000/login', { Email, Password }, {
+        console.log(process.env.ADMINROUTE,"env vjsdnd;vbjdf");
+        const  { data }  = await axios.post( `${process.env.ADMINROUTE}login`, { Email, Password }, {
             withCredentials: true
         })
-        const { data } = response
         if (data.success) {
             setUser(data.data)
-            return navigate('/')
+            return navigate('/officials')
         } else {
             setErr(data.message)
             return false
@@ -66,7 +66,6 @@ function Login({ userState }) {
     }
     return (
         <div className="min-h-full h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-cover relative">
-            
             <div className="absolute inset-0">
                 <img
                     src={Background}
@@ -74,10 +73,10 @@ function Login({ userState }) {
                     alt=""
                 />
             </div>
-            <div className="max-w-md mt-8 w-full space-y-8 relative">
+            <div className="max-w-md w-full space-y-8 relative">
                 <div>
-                    <h2 className="mt-8 text-center text-3xl font-semibold text-gray-900">
-                        Sign In Your account
+                    <h2 className="mt-6 text-center text-3xl font-semibold text-gray-900">
+                        Sign In Your account And Help Others
                     </h2>
                     <p className='text-red-600 font-serif font-2'>{err}</p>
                 </div>
@@ -102,7 +101,7 @@ function Login({ userState }) {
                         <button type="button" onClick={registeredUser} className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" > Login </button>
                     </div>
                     <div className="text-center">
-                        <p className="text-sm text-gray-600">I Don't have an account? <a href="#" onClick={(e) => navigate('/register')} className="font-medium text-indigo-600 hover:text-indigo-500"> Sign Up now </a> </p>
+                        <p className="text-sm text-gray-600">I Don't have an account? <a href="#" onClick={(e) => navigate('/officials/register')} className="font-medium text-indigo-600 hover:text-indigo-500"> Sign Up now </a> </p>
                     </div>
                 </form>
 
@@ -111,4 +110,4 @@ function Login({ userState }) {
     )
 }
 
-export default Login
+export default AdminLogin

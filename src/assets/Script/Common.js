@@ -38,6 +38,14 @@ const passwordValidation = (password, error) => {
     return true
 }
 
+const govtValidation = (id,error) =>{
+    const passwordRegex =  /^.{12,}$/;
+    if(!passwordRegex.test(id.trim())){
+        error('!! Enter Proper Govt ID !!');
+        return false;
+    }
+}
+
 const nameValidation = (name, error) => {
     const nameRegex = /^[a-zA-Z]+(?:[\s.]+[a-zA-Z]+)*$/;
     if (name.length === 0) {
@@ -66,4 +74,4 @@ const usernameValidation = (username, error) => {
     return true
 }
 
-export { nameValidation, emailValidation, passwordValidation, usernameValidation, phoneNumberValidation }
+export { nameValidation, emailValidation, passwordValidation, usernameValidation, phoneNumberValidation , govtValidation}
