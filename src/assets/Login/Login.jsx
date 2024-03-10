@@ -17,7 +17,6 @@ function Login({ userState }) {
     const [err, setErr] = useState('')
     const handleChange = (e) => {
         const { name, value } = e.target;
-
         switch (name) {
             case 'Email':
                 setEmail(value);
@@ -67,6 +66,7 @@ function Login({ userState }) {
     }
     return (
         <div className="min-h-full h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-cover relative">
+            
             <div className="absolute inset-0">
                 <img
                     src={Background}
@@ -74,9 +74,9 @@ function Login({ userState }) {
                     alt=""
                 />
             </div>
-            <div className="max-w-md w-full space-y-8 relative">
+            <div className="max-w-md mt-8 w-full space-y-8 relative">
                 <div>
-                    <h2 className="mt-6 text-center text-3xl font-semibold text-gray-900">
+                    <h2 className="mt-8 text-center text-3xl font-semibold text-gray-900">
                         Sign In Your account
                     </h2>
                     <p className='text-red-600 font-serif font-2'>{err}</p>
