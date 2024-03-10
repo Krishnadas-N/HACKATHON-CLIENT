@@ -5,7 +5,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Background from '../../../public/Background.jpg';
+import Background from '../../../public/userLogin.jpg';
 
 
 function Register({ userState }) {

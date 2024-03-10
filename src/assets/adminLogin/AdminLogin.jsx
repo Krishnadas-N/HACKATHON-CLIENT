@@ -4,9 +4,9 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Background from '../../../public/userLogin.jpg'
+import Background from '../../../public/Background.jpg'
 
-function Login({ userState }) {
+function AdminLogin({userState}) {
     const [Email, setEmail] = useState('')
     const [Password, setPassword] = useState('')
     const [show, setShow] = useState(false)
@@ -52,14 +52,13 @@ function Login({ userState }) {
         if (!check) {
             return false
         }
-
-        const response = await axios.post('http://localhost:3000/login', { Email, Password }, {
+        console.log(process.env.ADMINROUTE,"env vjsdnd;vbjdf");
+        const  { data }  = await axios.post( `${process.env.ADMINROUTE}login`, { Email, Password }, {
             withCredentials: true
         })
-        const { data } = response
         if (data.success) {
             setUser(data.data)
-            return navigate('/')
+            return navigate('/officials')
         } else {
             setErr(data.message)
             return false
@@ -111,4 +110,4 @@ function Login({ userState }) {
     )
 }
 
-export default Login
+export default AdminLogin

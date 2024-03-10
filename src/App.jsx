@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Register from './assets/Register/Register'
 import Cookies from 'js-cookie'
 import Login from './assets/Login/Login'
+import AdminLogin from './assets/adminLogin/AdminLogin'
 function App() {
   const [user, setUser] = useState(null)
   const VerifyUser = async () => {
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route path='/register' element={<Register userState={{ user, setUser }} />} />
           <Route path='/login' element={<Login userState={{ user, setUser }} />} />
+          <Route path='/officials/login' element={<AdminLogin userState={{ user, setUser }} />} />
         </Routes>
       </Router>
     </>
