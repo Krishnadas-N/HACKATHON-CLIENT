@@ -1,3 +1,4 @@
+
 const emailValidation = (email, error) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (email.length === 0) {
@@ -46,6 +47,14 @@ const govtValidation = (id,error) =>{
     }
 }
 
+const Rolevalidation = (role,error) =>{
+    if(!role){
+        error('Please choose a position');
+        return false
+    }
+}
+
+
 const nameValidation = (name, error) => {
     const nameRegex = /^[a-zA-Z]+(?:[\s.]+[a-zA-Z]+)*$/;
     if (name.length === 0) {
@@ -74,4 +83,5 @@ const usernameValidation = (username, error) => {
     return true
 }
 
-export { nameValidation, emailValidation, passwordValidation, usernameValidation, phoneNumberValidation , govtValidation}
+export { nameValidation, emailValidation, passwordValidation, usernameValidation, phoneNumberValidation ,
+     govtValidation ,Rolevalidation}

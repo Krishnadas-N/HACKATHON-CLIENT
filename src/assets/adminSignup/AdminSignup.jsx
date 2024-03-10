@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Input from '../Components/Input';
-import { emailValidation, nameValidation, passwordValidation, phoneNumberValidation ,govtValidation} from '../Script/Common';
+import { emailValidation, nameValidation, passwordValidation, phoneNumberValidation ,govtValidation, Rolevalidation ,} from '../Script/Common';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
@@ -14,6 +14,7 @@ function AdminSignup({userState}) {
     const [Govt, setGovt] = useState('');
     const [Password, setPassword] = useState('');
     const [Confirm, setConfirm] = useState('');
+    const [role, setRole] = useState('');
     const [show, setShow] = useState(false);
     const [conf, setConf] = useState(false);
     const [passwordErr, setPasswordErr] = useState('');
@@ -21,6 +22,7 @@ function AdminSignup({userState}) {
     const [emailErr, setEmailErr] = useState('');
     const [phoneErr, setPhoneErr] = useState('');
     const [govtErr, setGovtErr] = useState('');
+    const [roleErr, setRoleErr] = useState('');
     const navigate = useNavigate();
     const [err, setErr] = useState('');
     const { setUser } = userState;
@@ -51,6 +53,10 @@ function AdminSignup({userState}) {
                 setGovt(value);
                 setGovtErr('');
                 break;
+            case 'role':
+                setRole(value);
+                setRoleErr('');
+                break;
             default:
                 break;
         }
@@ -79,6 +85,9 @@ function AdminSignup({userState}) {
             check = false
         }
         if (!govtValidation(Govt, setGovtErr)) {
+            check = false
+        }
+        if (!Rolevalidation(role, setRoleErr)) {
             check = false
         }
 
@@ -130,6 +139,19 @@ function AdminSignup({userState}) {
                     <div className="inputBox">
                         <Input Properties={{ type: 'string', name: 'governmentid', value: Govt, callback: handleChange, placeholder: 'Government Recognised ID' }} />
                         <p className='text-red-500 justify-center'>{govtErr}</p>
+                    </div>
+                    <div className="inputBox ">
+                        <select name="role" id="role" onChange={handleChange} className='mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md' >
+                            <option value="">default</option>
+                            <option value="Police">Police</option>
+                            <option value="Advocate">Advocate</option>
+                            <option value="CBI">CBI</option>
+                            <option value="Judge">Judge</option>
+                            <option value="Minister">Minster</option>
+                            <option value="CheafMinister">Cheaf Minister</option>
+                            <option value="PrimeMinister">Prime Minister</option>
+                        </select>
+                        <p className='text-red-500 justify-center'>{roleErr}</p>
                     </div>
                     <div className="inputBox relative">
                         <input id="password" name="Password"
