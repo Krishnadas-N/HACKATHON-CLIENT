@@ -10,3 +10,8 @@ export const getComplaints = async () => {
     })
     return data?.success
 }
+
+export const acceptFunc = async () => {
+    const { data } = await axios.get('http://localhost:3000/officials/accept')
+    return data
+}

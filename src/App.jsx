@@ -9,6 +9,7 @@ import { jwtDecode } from 'jwt-decode';
 import { getUserToken } from './Functions'
 import AdminSignup from './assets/adminSignup/AdminSignup'
 import ListComplaints from './assets/ListComplaints/ListComplaints'
+import ReportDetails from './assets/ReportDetails'
 
 
 function App() {
@@ -46,8 +47,8 @@ function App() {
           <Route path='/officials/login' element={<IsUserExist ifSession={<Navigate to='/officials' />} NotSession={<AdminLogin userState={{ user, setUser }} />} />} admin={true} />
           <Route path='/officials' element={<IsUserExist ifSession={<AdminHome />} NotSession={<Navigate to='/officials/login' />} />} admin={true} />
           <Route path='/officials/register' element={<IsUserExist ifSession={<Navigate to='/officials' />} NotSession={<AdminSignup />} />} admin={true} />
-          <Route path='/ListComplaints' element={<ListComplaints/>} />
-
+          <Route path='/ListComplaints' element={<ListComplaints />} />
+          <Route path='/reportDetails' element={<ReportDetails />} />
         </Routes>
       </Router>
 
