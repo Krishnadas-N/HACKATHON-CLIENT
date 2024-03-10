@@ -99,9 +99,14 @@ function Register({ userState }) {
                 />
             </div>
             <div className="max-w-md w-full space-y-8 relative">
-                <div>
-                    <h2 className="mt-6 text-center text-3xl font-semibold text-gray-900">
-                        Create an account
+                <div className='container bg-white '>
+                    <h2 className="mt-6 text-center text-3xl font-semibold text-black">
+                        
+                    </h2>
+                </div>
+                <div className='container bg-white opacity-60'>
+                    <h2 className="mt-6 text-center text-3xl font-semibold text-indigo-700">
+                        Create a new Account
                     </h2>
                     <p className='text-red-600 font-serif font-2'>{err}</p>
                 </div>
@@ -137,7 +142,7 @@ function Register({ userState }) {
                         <button type="button" onClick={registerUser} className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" > Sign up </button>
                     </div>
                     <div className="text-center">
-                        <p className="text-sm text-gray-600"> Already have an account? <a href="#" onClick={(e) => navigate('/login')} className="font-medium text-indigo-600 hover:text-indigo-500"> Sign in now </a> </p>
+                        <p className="text-sm text-gray-100"> Already have an account? <a href="#" onClick={(e) => navigate('/login')} className="font-medium text-white hover:text-indigo-500"> Sign in now </a> </p>
                     </div>
                 </form>
 

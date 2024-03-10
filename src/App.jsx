@@ -47,6 +47,7 @@ function App() {
           <Route path='/officials' element={<IsUserExist ifSession={<AdminHome />} NotSession={<Navigate to='/officials/login' />} />} admin={true} />
           <Route path='/officials/register' element={<IsUserExist ifSession={<Navigate to='/officials' />} NotSession={<AdminSignup />} />} admin={true} />
           <Route path='/ListComplaints' element={<ListComplaints/>} />
+
         </Routes>
       </Router>
 
