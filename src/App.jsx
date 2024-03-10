@@ -6,6 +6,7 @@ import AdminLogin from './assets/adminLogin/AdminLogin'
 import Home from './assets/Home/Home'
 import AdminHome from './assets/AdminHome/AdminHome'
 import { jwtDecode } from 'jwt-decode';
+import { getUserToken } from './Functions'
 
 
 function App() {
@@ -14,14 +15,12 @@ function App() {
   const [session, setSession] = useState(false)
 
   const IsUserExist = ({ ifSession, NotSession }) => {
-    const token = JSON.parse(localStorage.getItem('userToken'))
+    const token = getUserToken()
     if (token) {
-      console.log(token);
       let decodedToken = jwtDecode(token);
       let currentDate = new Date();
       if (decodedToken.exp * 1000 > currentDate.getTime()) { setSession(true) }
     }
-    console.log(ifSession, NotSession);
     return session ? ifSession : NotSession
   }
 
