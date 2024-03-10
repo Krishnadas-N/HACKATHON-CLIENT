@@ -77,7 +77,7 @@ function Register({ userState }) {
             return false
         }
 
-        const response = await axios.post('http://localhost:3000/signup', { Name, Email, Password, Phone }, {
+        const response = await axios.post('http://localhost:3000/signup', { userName: Name, Email, Password, Phone }, {
             withCredentials: true
         })
         const { data } = response

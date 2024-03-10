@@ -52,12 +52,12 @@ function Login({ userState }) {
             return false
         }
 
-        const response = await axios.post('http://localhost:3000/login', { Email, Password }, {
+        const { data } = await axios.post('http://localhost:3000/login', { Email, Password }, {
             withCredentials: true
         })
-        const { data } = response
         if (data.success) {
             setUser(data.data)
+            localStorage.setItem('userToken', JSON.stringify(data.data.token))
             return navigate('/')
         } else {
             setErr(data.message)

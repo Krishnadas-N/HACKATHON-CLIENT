@@ -80,7 +80,6 @@ const ReportForm = () => {
         e.preventDefault();
         getLocation().then(({ latitude, longitude }) => {
             setReport(prevState => ({ ...prevState, location: [latitude, longitude] }))
-            alert(true)
             console.log(report);
             submitReport()
         }).catch((error) => {
@@ -108,7 +107,7 @@ const ReportForm = () => {
                 report,
                 { headers }
             );
-            if (response.status === 200) {
+            if (response.data.success) {
                 await Swal.fire({
                     title: 'Success',
                     text: 'Submitted Successfully',
