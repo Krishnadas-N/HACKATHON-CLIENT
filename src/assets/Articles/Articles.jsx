@@ -7,7 +7,7 @@ const Articles = ({ articles }) => {
             {articles && articles.map((article, index) => (
                 <div
                     key={index}
-                    className="p-4 w-full h-auto cursor-pointer hover:shadow-lg transition duration-300"
+                    className="p-4 jus w-full h-auto cursor-pointer hover:shadow-lg transition duration-300"
                 >
                     <a href={article.link} target="_blank" rel="noopener noreferrer">
                         <img
